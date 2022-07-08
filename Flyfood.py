@@ -47,6 +47,7 @@ tempo = 0 # Variável utilizada para contabilizar o custo em distância do circu
 melhorTempo = 0  # Variável utilizada para definir o melhor tempo de todos os circuitos testados. "chamado de melhor tempo para facilitar o entendimento"
 melhorCircuito = [[0 for _ in range(1)] for _ in range(1)]
 while contador < len(circuitos):
+    # O laço for faz uma iteração definindo i como cada ponto de entrega do possível melhor circuito.
     for i in circuitos[contador]:
         # se é o primeiro ponto de entrega começamos contabilizando a distância do restaurante
         if circuitos[contador].index(i) == 0:
@@ -55,8 +56,8 @@ while contador < len(circuitos):
             yOne = coordenadas['R'][1]
             yTwo = coordenadas[f'{i}'][1]
             tempo += distancia(modulo(xTwo, xOne), modulo(yTwo, yOne))
-            entregaAtual = i
-
+            entregaAtual = i  # definimos o ponto de entrega que passamos como entrega atual a cada interação
+# Até o penúltimo ponto de entrega contabilizamos a distância indo do ponto de entrega atual(que no caso é o da interação anterior) até o ponto de entrega que está na vez.
         elif circuitos[contador].index(i) < len(circuitos[contador]) - 1:
             xOne = coordenadas[f'{entregaAtual}'][0]
             xTwo = coordenadas[f'{i}'][0]
@@ -86,5 +87,5 @@ while contador < len(circuitos):
                 melhorCircuito[0] = circuitos[contador]
     tempo = 0
     contador += 1
-print("O melhor circuito para fazer as entregas é: " + ' '.join(melhorCircuito[0]))
-print(melhorTempo)
+print("O melhor circuito para fazer as entregas é: " + ' '.join(melhorCircuito[0]))  # exibindo melhor circuito
+print(melhorTempo)  # exibindo melhor tempo ou distância adquirido.
